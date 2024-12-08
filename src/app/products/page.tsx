@@ -157,7 +157,16 @@ export default function Product() {
         <div className="flex flex-col sm:flex-nowrap sm:flex-row justify-center gap-12 mx-auto my-5 overflow-x-auto">
   <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
     <Image
-      src={"/Products.png"}
+      src={"/stool chair.png"}
+      alt="Logo"
+      width={300}
+      height={300}
+      className="object-cover w-full h-full"
+    />
+  </div>
+  <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
+    <Image
+      src={"/Image (4).png"}
       alt="Logo"
       width={300}
       height={300}
@@ -175,6 +184,15 @@ export default function Product() {
   </div>
   <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
     <Image
+      src={"/Products.png"}
+      alt="Logo"
+      width={300}
+      height={300}
+      className="object-cover w-full h-full"
+    />
+  </div>
+  <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
+    <Image
       src={"/Products (2).png"}
       alt="Logo"
       width={300}
@@ -184,16 +202,7 @@ export default function Product() {
   </div>
   <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
     <Image
-      src={"/Products (3).png"}
-      alt="Logo"
-      width={300}
-      height={300}
-      className="object-cover w-full h-full"
-    />
-  </div>
-  <div className="w-full sm:w-1/5 lg:w-1/5 xl:w-1/5 ">
-    <Image
-      src={"/Products (3).png"}
+      src={"/Image (6).png"}
       alt="Logo"
       width={300}
       height={300}
