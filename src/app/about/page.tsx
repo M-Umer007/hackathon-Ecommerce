@@ -59,7 +59,7 @@ export default function About() {
     <div className="bg-gray-100 p-6 rounded-lg shadow-md">
         <div className="text-blue-500 text-4xl mb-4">💳</div>
         <h2 className="text-2xl font-bold mb-2">Unbeatable prices</h2>
-        <p className="text-gray-700">For our materials and quality you won't find better prices anywhere</p>
+        <p className="text-gray-700">For our materials and quality you won&apos;t find better prices anywhere</p>
     </div>
     <div className="bg-gray-100 p-6 rounded-lg shadow-md">
         <div className="text-blue-500 text-4xl mb-4">♻️</div>
