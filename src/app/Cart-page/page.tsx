@@ -1,133 +1,117 @@
+"use client";
+
+import { useContext } from "react";
+import { CartContext } from "@/cart/page";
 import Image from "next/image";
 
+type Product = {
+  _id: string;
+  title: string; // Changed from "name" to "title" to match the query
+  description: string;
+  price: number;
+  priceWithoutDiscount?: number; // Optional, as it might not always be used
+  badge?: string; // Optional
+  inventory?: number; // Optional
+  tags?: string[]; // Array of tags
+  category?: {
+    _id: string;
+    title: string;
+  }; // Nested category object
+  imageUrl: string; // The URL for the image
+};
+
 export default function Cart() {
-return(
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    return <div>Error: Cart context is not available.</div>;
+  }
+  const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } = cartContext;
 
-<div className="flex flex-col md:flex-row gap-10 mx-10 items-center justify-center my-20">
-  <div className="w-[80vw] h-auto mx-auto">
-    <div>
-      <p className="font-bold">Bag</p>
-    </div>
-    <div className="flex justify-between">
-      <div className="flex">
+  return (
+    <div className="flex flex-col md:flex-row gap-10 mx-10 items-center justify-center my-20">
+      {/* Left Section: Bag Items */}
+      <div className="w-[80vw] h-auto mx-auto">
         <div>
-          <Image src={"/Products (2).png"} alt="" width={100} height={100} />
+          <p className="font-bold text-xl mb-5">Bag</p>
         </div>
-        <div className="flex flex-col gap-2">
+        {cartItems.map((item) => (
+          <div key={item._id} className="flex justify-between mb-6">
+            <div className="flex">
+              <div>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={100}
+                  height={100}
+                  className="rounded-md"
+                />
+              </div>
+              <div className="flex flex-col gap-2 ml-4">
+                <div>
+                  <p className="text-lg font-bold">{item.title}</p>
+                </div>
+                <div className="font-thin text-gray-600">
+                  <p>Price: ${item.price}</p>
+                  <div className="flex justify-between">
+                    <span>Quantity: {item.quantity}</span>
+                  </div>
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <button
+                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none"
+                    onClick={() => addToCart && addToCart(item)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none"
+                    onClick={() => removeFromCart(item)}
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-lg font-bold">${item.price * item.inventory}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Right Section: Summary */}
+      <div className="w-full min-h-auto md:w-1/3 mx-auto my-auto gap-10 flex flex-col">
+        <div className="gap-10 flex flex-col">
+          <div className="text-3xl mb-5">Summary</div>
           <div>
-            <p>Library Stool Chair</p>
-          </div>
-          <div className="font-thin">
-            <p>Ashen Slate/Cobalt Bliss</p>
             <div className="flex justify-between">
-              <p>Size L</p>
-              <span>Quantity</span>
+              <p>Sub Total</p>
+              <p>${getCartTotal()}</p>
             </div>
-          </div>
-
-          <div className="flex gap-2">
-            <div>
-              <Image
-                src={"/Frame (1).png"}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </div>
-            <div>
-              <Image
-                src={"/Frame.png"}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p>MPR:99$</p>
-      </div>
-    </div>
-
-    <div className="flex justify-between">
-      <div className="flex">
-        <div>
-          <Image
-            src={"/Image (4).png"}
-            alt=""
-            width={100}
-            height={100}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div>
-            <p>Library Stool Chair</p>
-          </div>
-          <div className="font-thin">
-            <p>Ashen Slate/Cobalt Bliss</p>
             <div className="flex justify-between">
-              <p>Size L</p>
-              <span>Quantity</span>
+              <p>Estimated Delivery And Handling</p>
+              <p>Free</p>
             </div>
           </div>
-
-          <div className="flex gap-2">
-            <div>
-              <Image
-                src={"/Frame (1).png"}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </div>
-            <div>
-              <Image
-                src={"/Frame.png"}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </div>
+          <div className="flex justify-between">
+            <p>Total</p>
+            <p>${getCartTotal()}</p>
           </div>
         </div>
-      </div>
-      <div>
-        <p>MPR:99$</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="w-full min-h-auto md:w-1/3  mx-auto my-auto gap-10 flex flex-col">
-    <div className="gap-10 flex flex-col">
-      <div className="text-3xl">
-        Summary
-      </div>
-      <div>
-        <div className="flex justify-between">
-          <p>Sub Total</p>
-          <p>$198.00</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Estimated Delivery And Handling</p>
-          <p>Free</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <p>Total</p>
-        <p>$198.00</p>
+        {cartItems.length > 0 && (
+          <div className="mt-5">
+            <button
+              className="px-4 py-2 bg-gray-800 text-white text-lg font-bold uppercase rounded hover:bg-gray-700 focus:outline-none"
+              onClick={() => clearCart()}
+            >
+              Clear Cart
+            </button>
+          </div>
+        )}
+        {cartItems.length === 0 && (
+          <h1 className="text-lg font-bold">Your cart is empty</h1>
+        )}
       </div>
     </div>
-    <div className="mt-5">
-      <Image
-        src="/Auto Layout Horizontal(button).png"
-        alt="Shop Now"
-        width={220}
-        height={220}
-      />
-    </div>
-  </div>
-</div>
-
-);
+  );
 }
