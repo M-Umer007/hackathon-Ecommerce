@@ -1,3 +1,4 @@
+
 import { ExploreNewAndPopularStyles, allProducts } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Image from "next/image";
@@ -20,8 +21,14 @@ type Product = {
   imageUrl: string; // The URL for the image
 };
 
-export default async function Test({ params }: { params: { productId: string } }) {
-  const { productId } = params;
+type ProductPageProps = {
+  params: {
+    productId: string;  // Ensure productId is a string
+  };
+};
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { productId } = params; // Extract productId from params
 
   const products: Product[] = await sanityFetch({ query: allProducts });
   const style: Product[] = await sanityFetch({
