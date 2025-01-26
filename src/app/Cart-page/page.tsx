@@ -4,21 +4,6 @@ import { useContext } from "react";
 import { CartContext } from "@/cart/page";
 import Image from "next/image";
 
-type Product = {
-  _id: string;
-  title: string; // Changed from "name" to "title" to match the query
-  description: string;
-  price: number;
-  priceWithoutDiscount?: number; // Optional, as it might not always be used
-  badge?: string; // Optional
-  inventory?: number; // Optional
-  tags?: string[]; // Array of tags
-  category?: {
-    _id: string;
-    title: string;
-  }; // Nested category object
-  imageUrl: string; // The URL for the image
-};
 
 export default function Cart() {
   const cartContext = useContext(CartContext);

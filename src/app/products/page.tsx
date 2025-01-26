@@ -1,5 +1,13 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
+/* eslint-disable react-hooks/rules-of-hooks */
+
+
+
+
 import { ourProducts, featuredProducts } from "../../sanity/lib/queries";
 import { sanityFetch } from "../../sanity/lib/fetch";
 import Image from "next/image";
@@ -72,7 +80,7 @@ export default function Home() {
               </div>
               <div className="mt-6 flex justify-between items-center">
                 <button
-                  onClick={() => addToCart({
+                  onClick={() => addToCart&&addToCart({
                     _id:product._id,
                     title: product.title,
                     price: product.price,

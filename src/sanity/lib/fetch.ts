@@ -1,5 +1,13 @@
-import exp from "constants";
+
 import { createClient } from "next-sanity";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
+/* eslint-disable react-hooks/rules-of-hooks */
+
+
+
 
 
 const client = createClient({

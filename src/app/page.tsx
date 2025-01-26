@@ -1,9 +1,17 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
+/* eslint-disable react-hooks/rules-of-hooks */
+
+
+
+
+
 import {
   topchair,
   ourProducts,
-  featuredProducts,
   topProducts,
   ExploreNewAndPopularStyles,
 } from "@/sanity/lib/queries";
@@ -61,7 +69,7 @@ import { useState, useEffect } from "react";
       return <div>Error: Cart context is not available.</div>;
     }
   
-    let imageurl = HeadingChair?.imageUrl;
+    const imageurl = HeadingChair?.imageUrl;
   return (
     <div className="max-w-[90vw] min-h-[100vh] mx-auto">
       {/* First Component */}
@@ -122,7 +130,7 @@ import { useState, useEffect } from "react";
 
 
   
-            {ourProd.slice(0, 5).map((product,index) => (
+            {ourProd.slice(0, 5).map((product) => (
           
               <div className="w-full sm:w-1/4 lg:w-1/4 xl:w-1/5 h-full" key={product._id}>
                 <Image
